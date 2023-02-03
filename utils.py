@@ -1,4 +1,3 @@
-from steampy.guard import generate_one_time_code
 
 VK_CODE = {'backspace':0x08,
            'tab':0x09,
@@ -146,9 +145,3 @@ VK_CODE = {'backspace':0x08,
            ']':0xDD,
            "'":0xDE,
            '`':0xC0}
-
-
-if __name__ == '__main__':
-    shared_secret = 'i3cOnfcHdoT2+RI2BgKYFLETtQ4='
-    guard_code = generate_one_time_code(shared_secret)
-    print(guard_code)
