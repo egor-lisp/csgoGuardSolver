@@ -11,7 +11,8 @@ def main():
     accs = []
     with open('accs.txt', 'r') as f:
         for line in f.read().split('\n'):
-            accs.append(line)
+            if bool(line):
+                accs.append(line)
 
     mafiles = {}  # Key: account name
     for file in os.listdir(config.mafiles_path):
@@ -22,6 +23,12 @@ def main():
 
     for n, acc in enumerate(accs):
         username, password = acc.split(':')
+        if not mafiles.get('username'):
+            print(f'Не найден мафайл для аккаунта {username}')
+            continue
+        if not mafiles[username].get('shared_secret'):
+            print(f'В мафайле отсутствует ключ shared_secret')
+            continue
         shared_secret = mafiles[username]['shared_secret']
         print(n+1, username, password, shared_secret)
         start_steam_client(username, password, shared_secret)
